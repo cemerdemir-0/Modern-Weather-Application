@@ -2,8 +2,6 @@
 
 A modern, responsive weather application built with Angular 19, featuring real-time weather data for all 81 Turkish cities with premium UI/UX design.
 
-![Weather App Screenshot](https://via.placeholder.com/800x400/667eea/ffffff?text=Turkish+Weather+App)
-
 ## ✨ Features
 
 ### 🎯 Core Features
