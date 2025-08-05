@@ -1,0 +1,49 @@
+<div class="favorites-container">
+  <button class="favorites-toggle" (click)="toggleFavorites()" [class.active]="showFavorites">
+    <span class="material-icons">favorite</span>
+    <span class="favorites-text">Favoriler</span>
+    <span class="favorites-count" *ngIf="favorites.length > 0">{{ favorites.length }}</span>
+  </button>
+
+  <div class="favorites-dropdown" *ngIf="showFavorites" [@slideDown]>
+    <div class="favorites-header">
+      <h3>Favori Şehirler</h3>
+      <button 
+        class="clear-all-btn" 
+        *ngIf="favorites.length > 0" 
+        (click)="clearAllFavorites()"
+        title="Tümünü Temizle"
+      >
+        <span class="material-icons">clear_all</span>
+      </button>
+    </div>
+
+    <div class="favorites-content">
+      <div class="empty-state" *ngIf="favorites.length === 0">
+        <span class="material-icons">favorite_border</span>
+        <p>Henüz favori şehriniz yok</p>
+        <small>Şehir arama sonuçlarından kalp ikonuna tıklayarak favori ekleyebilirsiniz</small>
+      </div>
+
+      <div class="favorites-list" *ngIf="favorites.length > 0">
+        <div 
+          class="favorite-item" 
+          *ngFor="let city of favoriteCities"
+          (click)="selectCity(city.name)"
+        >
+          <div class="city-info">
+            <span class="city-name">{{ city.name }}</span>
+            <span class="city-region">{{ city.region }}</span>
+          </div>
+          <button 
+            class="remove-btn" 
+            (click)="removeFromFavorites(city.name, $event)"
+            title="Favorilerden Çıkar"
+          >
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

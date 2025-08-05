@@ -1,0 +1,13 @@
+<button 
+  class="location-btn" 
+  (click)="getCurrentLocation()" 
+  [disabled]="isLoading"
+  title="Mevcut konumumu kullan"
+>
+  <span class="material-icons" [class.spinning]="isLoading">
+    {{ isLoading ? 'refresh' : 'my_location' }}
+  </span>
+  <span class="location-text">
+    {{ isLoading ? 'Konum alınıyor...' : 'Konumum' }}
+  </span>
+</button>

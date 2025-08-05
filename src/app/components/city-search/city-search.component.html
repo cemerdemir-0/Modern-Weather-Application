@@ -1,0 +1,37 @@
+<div class="search-container">
+  <div class="search-input-wrapper">
+    <span class="material-icons search-icon">search</span>
+    <input 
+      type="text" 
+      [(ngModel)]="searchTerm" 
+      (input)="onSearchChange()"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      placeholder="Şehir ara..." 
+      class="search-input"
+    >
+  </div>
+  
+  <div class="dropdown" *ngIf="showDropdown">
+    <div 
+      class="dropdown-item" 
+      *ngFor="let city of filteredCities"
+      (click)="selectCity(city)"
+    >
+      <div class="city-info">
+        <span class="city-name">{{ city.name }}</span>
+        <span class="city-region">{{ city.region }}</span>
+      </div>
+      <button 
+        class="favorite-btn" 
+        (click)="toggleFavorite(city, $event)"
+        [class.active]="isFavorite(city.name)"
+        [title]="isFavorite(city.name) ? 'Favorilerden çıkar' : 'Favorilere ekle'"
+      >
+        <span class="material-icons">
+          {{ isFavorite(city.name) ? 'favorite' : 'favorite_border' }}
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

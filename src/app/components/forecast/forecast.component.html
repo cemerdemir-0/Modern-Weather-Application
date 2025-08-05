@@ -1,0 +1,39 @@
+<div class="forecast-container" *ngIf="forecast.length > 0">
+  <h3 class="forecast-title">7 Günlük Tahmin</h3>
+  
+  <div class="forecast-grid">
+    <div 
+      class="forecast-item" 
+      *ngFor="let day of forecast; let i = index"
+      [class.today]="isToday(i)"
+    >
+      <div class="day-info">
+        <span class="day-name">{{ isToday(i) ? 'Bugün' : getShortDayName(day.dayName) }}</span>
+        <span class="date">{{ day.date.split('.').slice(0, 2).join('.') }}</span>
+      </div>
+      
+      <div class="weather-icon">{{ day.icon }}</div>
+      
+      <div class="temperature-range">
+        <span class="max-temp">{{ day.maxTemp }}°</span>
+        <div class="temp-bar">
+          <div class="temp-fill" [style.width.%]="(day.maxTemp / 35) * 100"></div>
+        </div>
+        <span class="min-temp">{{ day.minTemp }}°</span>
+      </div>
+      
+      <div class="additional-info">
+        <div class="info-item">
+          <span class="material-icons">opacity</span>
+          <span>{{ day.humidity }}%</span>
+        </div>
+        <div class="info-item">
+          <span class="material-icons">air</span>
+          <span>{{ day.windSpeed }} km/h</span>
+        </div>
+      </div>
+      
+      <div class="description">{{ day.description }}</div>
+    </div>
+  </div>
+</div>

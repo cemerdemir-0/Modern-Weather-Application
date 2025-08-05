@@ -1,0 +1,108 @@
+<div class="weather-card" *ngIf="weatherData">
+  <div class="main-info">
+    <div class="location-time">
+      <h2 class="location">{{ weatherData.location }}</h2>
+      <p class="date-time">{{ getCurrentDate() }} • {{ getCurrentTime() }}</p>
+    </div>
+    
+    <div class="temperature-section">
+      <div class="temperature">
+        <span class="temp-value">{{ weatherData.temperature }}</span>
+        <span class="temp-unit">°C</span>
+      </div>
+      <div class="weather-icon">{{ weatherData.icon }}</div>
+    </div>
+  </div>
+
+  <div class="weather-description">
+    <p>{{ weatherData.description }}</p>
+    <p class="feels-like">Hissedilen {{ weatherData.feelsLike }}°C</p>
+  </div>
+
+  <div class="weather-details">
+    <div class="detail-grid">
+      <div class="detail-item">
+        <span class="material-icons">opacity</span>
+        <div class="detail-info">
+          <span class="detail-label">Nem</span>
+          <span class="detail-value">{{ weatherData.humidity }}%</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <span class="material-icons">air</span>
+        <div class="detail-info">
+          <span class="detail-label">Rüzgar</span>
+          <span class="detail-value">{{ weatherData.windSpeed }} km/h</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <span class="material-icons">compress</span>
+        <div class="detail-info">
+          <span class="detail-label">Basınç</span>
+          <span class="detail-value">{{ weatherData.pressure }} hPa</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <span class="material-icons">visibility</span>
+        <div class="detail-info">
+          <span class="detail-label">Görüş</span>
+          <span class="detail-value">{{ weatherData.visibility }} km</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <span class="material-icons">wb_sunny</span>
+        <div class="detail-info">
+          <span class="detail-label">UV İndeksi</span>
+          <span class="detail-value" [style.color]="getUVIndexColor(weatherData.uvIndex)">
+            {{ weatherData.uvIndex }} ({{ getUVIndexLevel(weatherData.uvIndex) }})
+          </span>
+        </div>
+      </div>
+
+      <div class="detail-item" *ngIf="weatherData.airQuality">
+        <span class="material-icons">air</span>
+        <div class="detail-info">
+          <span class="detail-label">Hava Kalitesi</span>
+          <span class="detail-value" [style.color]="getAirQualityInfo(weatherData.airQuality.aqi).color">
+            {{ getAirQualityInfo(weatherData.airQuality.aqi).level }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="air-quality-section" *ngIf="weatherData.airQuality">
+      <h4>Hava Kalitesi Detayları</h4>
+      <div class="air-quality-grid">
+        <div class="air-quality-item">
+          <span class="pollutant">PM2.5</span>
+          <span class="value">{{ weatherData.airQuality.pm2_5 }} μg/m³</span>
+        </div>
+        <div class="air-quality-item">
+          <span class="pollutant">PM10</span>
+          <span class="value">{{ weatherData.airQuality.pm10 }} μg/m³</span>
+        </div>
+        <div class="air-quality-item">
+          <span class="pollutant">O₃</span>
+          <span class="value">{{ weatherData.airQuality.o3 }} μg/m³</span>
+        </div>
+        <div class="air-quality-item">
+          <span class="pollutant">NO₂</span>
+          <span class="value">{{ weatherData.airQuality.no2 }} μg/m³</span>
+        </div>
+      </div>
+      <div class="air-quality-info">
+        <p class="air-quality-description">
+          {{ getAirQualityInfo(weatherData.airQuality.aqi).description }}
+        </p>
+        <p class="air-quality-advice" *ngIf="getAirQualityInfo(weatherData.airQuality.aqi).advice">
+          <span class="material-icons">info</span>
+          {{ getAirQualityInfo(weatherData.airQuality.aqi).advice }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
